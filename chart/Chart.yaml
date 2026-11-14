@@ -1,0 +1,6 @@
+apiVersion: v2
+name: echo-service
+description: Stateless HTTP service with schema-validated values
+type: application
+version: 0.1.0
+appVersion: "1.27.3"
