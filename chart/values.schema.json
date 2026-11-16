@@ -38,6 +38,22 @@
         "limits": { "$ref": "#/definitions/resourceList" }
       }
     },
+    "podDisruptionBudget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["minAvailable"],
+      "properties": {
+        "minAvailable": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "networkPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enabled"],
+      "properties": {
+        "enabled": { "type": "boolean" }
+      }
+    },
     "probes": {
       "type": "object",
       "additionalProperties": false,

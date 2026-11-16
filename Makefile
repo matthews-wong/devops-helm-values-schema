@@ -1,9 +1,9 @@
 CHART := chart
 ENVS := dev prod
 
-.PHONY: validate lint render schema-tests rollout-test
+.PHONY: validate lint render schema-tests rollout-test render-tests
 
-validate: lint render schema-tests rollout-test
+validate: lint render schema-tests rollout-test render-tests
 
 lint:
 	helm lint $(CHART)
@@ -19,3 +19,6 @@ schema-tests:
 
 rollout-test:
 	tests/rollout_checksum.sh
+
+render-tests:
+	tests/render_assertions.sh
