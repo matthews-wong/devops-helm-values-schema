@@ -27,3 +27,9 @@ probes:
   path: /
   initialDelaySeconds: 2
   periodSeconds: 10
+
+podDisruptionBudget:
+  minAvailable: 1
+
+networkPolicy:
+  enabled: true
