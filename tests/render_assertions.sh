@@ -17,3 +17,11 @@ min="$(render | awk '/minAvailable:/ {print $2}')"
 replicas="$(render | awk '/replicas:/ {print $2}')"
 (( min < replicas )) || { echo "FAIL: minAvailable ($min) must stay below replicas ($replicas)"; exit 1; }
 echo "ok:   pdb and networkpolicy render as expected"
+
+# The test pod must carry the test hook and stay out of the Service selector.
+hook="$(render --show-only templates/tests/test-connection.yaml)"
+grep -q 'helm.sh/hook: test' <<<"$hook" || { echo "FAIL: test pod lacks the test hook annotation"; exit 1; }
+if grep -q "app.kubernetes.io/name: echo-service$" <<<"$hook"; then
+  echo "FAIL: test pod matches the Service selector"; exit 1
+fi
+echo "ok:   test hook pod renders outside the Service selector"
